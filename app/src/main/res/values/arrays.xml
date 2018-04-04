@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="icons">
+        <item>@drawable/bone</item>
+        <item>@drawable/donkey</item>
+        <item>@drawable/cat</item>
+        <item>@drawable/paw</item>
+        <item>@drawable/cow</item>
+        <item>@drawable/cards_heart</item>
+    </array>
+</resources>

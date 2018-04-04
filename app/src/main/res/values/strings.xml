@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PetPoint</string>
+
+    <string name="home_get_list_ok">Lista de Mascotas al Dia!</string>
+    <string name="snack_retry">Reintentar!</string>
+    <string name="error_network">No hay conexion a internet</string>
+    <string name="error_data">Ha ocurrido un error al obtener los datos!</string>
+
+    <string name="image_description">Imagen de carga</string>
+
 </resources>
