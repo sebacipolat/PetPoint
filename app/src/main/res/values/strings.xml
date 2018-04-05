@@ -8,4 +8,10 @@
 
     <string name="image_description">Imagen de carga</string>
 
+    <string name="store_lbl">PetPoint Store</string>
+
+    <string name="permission_location">Nos gustaria conocer tu ubicacion para mostrarte la tienda mas cercana!\nPara ello deberas permitirnos el acceso a la localizacion.</string>
+    <string name="permission_location_title">Aviso</string>
+    <string name="permission_location_ok">Aceptar</string>
+
 </resources>

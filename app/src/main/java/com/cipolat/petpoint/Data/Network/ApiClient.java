@@ -13,20 +13,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static Retrofit retrofitXML = null;
     private static Retrofit retrofitJSON = null;
-
-    private static OkHttpClient client;
 
     public static OkHttpClient getOKClient() {
         OkHttpClient client;
         OkHttpClient.Builder clientbuilder = new OkHttpClient.Builder();
         clientbuilder.followRedirects(true);
-
-       /* if (BuildConfig.DEBUG) {
-            /// /debug stethto only debug
-            clientbuilder.addNetworkInterceptor(new StethoInterceptor());
-        }*/
         client = clientbuilder.build();
         return client;
     }
@@ -41,17 +33,6 @@ public class ApiClient {
                     .build();
         }
         return retrofitJSON;
-    }
-
-    public static Retrofit getClient(String url) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(url)
-                .client(getOKClient())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-
-        return retrofit;
     }
 
 }

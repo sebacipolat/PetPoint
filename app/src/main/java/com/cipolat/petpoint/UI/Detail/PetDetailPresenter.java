@@ -1,50 +1,44 @@
-package com.cipolat.petpoint.UI.Home;
-
-import android.content.Context;
+package com.cipolat.petpoint.UI.Detail;
 
 import com.cipolat.petpoint.Data.Model.ErrorType;
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.Data.Network.PetStoreApiInteractor;
 import com.cipolat.petpoint.UI.Base.Presenter;
 
-import java.util.ArrayList;
-
 /**
  * Created by sebastian on 23/07/17.
  */
 
-public class HomePresenter implements Presenter<HomeView> {
-    private HomeView mHomeView;
+public class PetDetailPresenter implements Presenter<DetailView> {
+    private DetailView mDetailView;
     private PetStoreApiInteractor mInteractor;
-    private ArrayList<Pet> list;
 
-    public HomePresenter(Context mCtx) {
+    public PetDetailPresenter() {
         mInteractor = new PetStoreApiInteractor();
     }
 
     @Override
-    public void setView(HomeView view) {
+    public void setView(DetailView view) {
         if (view == null) throw new IllegalArgumentException("You can't set a null view");
-          mHomeView = view;
+        mDetailView = view;
     }
 
-    public void getPetsList() {
-        mInteractor.findPetsAvailable(new PetStoreApiInteractor.PetCallback() {
+    public void getPetDetails(long data) {
+        mInteractor.getPetDetail(data, new PetStoreApiInteractor.PetDetailCallback() {
             @Override
-            public void onSuccess(ArrayList<Pet> response) {
-                mHomeView.onGetPetsOk(response);
-                list = response;
+            public void onSuccess(Pet response) {
+                mDetailView.onGetDetailOk(response);
             }
 
             @Override
             public void onError(ErrorType e) {
-                mHomeView.onError(e);
+                mDetailView.onError(e);
             }
         });
     }
 
     @Override
     public void detachView() {
-        mHomeView = null;
+        mDetailView = null;
     }
 }

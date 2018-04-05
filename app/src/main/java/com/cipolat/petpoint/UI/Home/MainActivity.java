@@ -1,27 +1,28 @@
 package com.cipolat.petpoint.UI.Home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.cipolat.petpoint.Data.Model.ErrorType;
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
-
+import com.cipolat.petpoint.UI.Detail.DetailActivity;
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements HomeView {
+public class MainActivity extends AppCompatActivity implements HomeView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity implements HomeView {
     ImageView loader;
     @BindView(R.id.coordLayout)
     CoordinatorLayout coordLay;
+    @BindView(R.id.swipeLayout)
+    SwipeRefreshLayout swipeLayout;
 
     private HomePresenter mPresenter;
     private PetsAdapter mAdapter;
@@ -44,9 +47,13 @@ public class MainActivity extends AppCompatActivity implements HomeView {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        swipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
+        swipeLayout.setOnRefreshListener(this);
+
         mPresenter = new HomePresenter(this);
         mPresenter.setView(this);
         getList();
+
     }
 
     private void fillList(final ArrayList<Pet> lista) {
@@ -55,27 +62,25 @@ public class MainActivity extends AppCompatActivity implements HomeView {
         listRecylr.setLayoutManager(mLinearManager);
         listRecylr.setHasFixedSize(true);
         listRecylr.setAdapter(mAdapter);
-       /* mAdapter.setOnClickListener(new View.OnClickListener() {
+        listRecylr.setVisibility(View.VISIBLE);
+        mAdapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Article itmArt = mAdapter.getItemByPos(listNotas.getChildAdapterPosition(view));
-                if (itmArt != null) {
-                    Intent inten = new Intent(HomeActivity.this, ArticleViewerActivity.class);
-                    inten.putExtra(ArticleViewerActivity.ARTICLE_ID, String.valueOf(itmArt.getData().getId()));
-                    inten.putExtra(ArticleViewerActivity.ARTICLE_SLUG, String.valueOf(itmArt.getArticleSlug()));
-                    inten.putExtra(ArticleViewerActivity.ARTICLE_SECTION_NAME, String.valueOf(itmArt.getArticleSectionName()));
+                Pet itmPet = mAdapter.getItemByPos(listRecylr.getChildAdapterPosition(view));
+                if (itmPet != null) {
+                    Intent inten = new Intent(MainActivity.this, DetailActivity.class);
+                    inten.putExtra(DetailActivity.PET_KEY, itmPet);
                     startActivity(inten);
                 }
             }
         });
-*/
-        listRecylr.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     public void onGetPetsOk(ArrayList<Pet> list) {
         showLoading(false);
+        showLoaderInidicator(false);
         fillList(list);
         Snackbar.make(coordLay, getString(R.string.home_get_list_ok), Snackbar.LENGTH_LONG).show();
     }
@@ -87,6 +92,8 @@ public class MainActivity extends AppCompatActivity implements HomeView {
             showErrorSnack(getString(R.string.error_network));
         else
             showErrorSnack(getString(R.string.error_data));
+
+        showLoaderInidicator(false);
     }
 
     private void getList() {
@@ -98,17 +105,21 @@ public class MainActivity extends AppCompatActivity implements HomeView {
         if (visible) {
             Glide.with(this).load(R.drawable.loaderdog).into(loader);
             loader.setVisibility(View.VISIBLE);
-            listRecylr.setVisibility(View.GONE);
+            swipeLayout.setVisibility(View.GONE);
         } else {
             loader.setVisibility(View.GONE);
-            listRecylr.setVisibility(View.VISIBLE);
+            swipeLayout.setVisibility(View.VISIBLE);
         }
+    }
+
+    private void showLoaderInidicator(boolean var) {
+        swipeLayout.setRefreshing(var);
     }
 
     private void showErrorPlaceHolder() {
         Glide.with(this).clear(loader);
         loader.setVisibility(View.VISIBLE);
-        listRecylr.setVisibility(View.GONE);
+        swipeLayout.setVisibility(View.GONE);
         loader.setImageResource(R.drawable.error_cloud);
     }
 
@@ -124,4 +135,15 @@ public class MainActivity extends AppCompatActivity implements HomeView {
                 .show();
     }
 
+    @Override
+    public void onRefresh() {
+        showLoaderInidicator(true);
+        mPresenter.getPetsList();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPresenter.detachView();
+    }
 }

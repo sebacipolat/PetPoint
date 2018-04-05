@@ -15,10 +15,8 @@ import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
 
 import java.util.Random;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ViewHolderPet extends RecyclerView.ViewHolder {
 
@@ -27,28 +25,25 @@ public class ViewHolderPet extends RecyclerView.ViewHolder {
     @BindView(R.id.iconItm)
     ImageView imgIcon;
 
-    private Context mCtx;
+    private TypedArray iconArrray;
 
     ViewHolderPet(View itemView, Context contxt) {
         super(itemView);
         ButterKnife.bind(this, itemView);
-        this.mCtx = contxt;
-    }
-
-    @OnClick(R.id.petItm)
-    public void petClick() {
+        Resources res = contxt.getResources();
+        iconArrray = res.obtainTypedArray(R.array.icons);
     }
 
     public void bindObject(Pet pet) {
-        labelItm.setText(pet.getName());
+        if (pet != null) {
+            if (pet.getName() != null)
+                labelItm.setText(pet.getName());
 
-        Resources res = this.mCtx.getResources();
-        TypedArray iconArrray = res.obtainTypedArray(R.array.icons);
-        Random randomGenerator = new Random();
-        int randomInt = randomGenerator.nextInt(iconArrray.length());
-        Drawable drawable = iconArrray.getDrawable(randomInt);
-
-        imgIcon.setImageDrawable(drawable);
+            Random randomGenerator = new Random();
+            int randomInt = randomGenerator.nextInt(iconArrray.length());
+            Drawable drawable = iconArrray.getDrawable(randomInt);
+            imgIcon.setImageDrawable(drawable);
+        }
     }
 
 }

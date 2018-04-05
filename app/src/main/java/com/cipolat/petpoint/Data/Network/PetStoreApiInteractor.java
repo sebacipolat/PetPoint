@@ -40,11 +40,34 @@ public class PetStoreApiInteractor {
                     }
                 });
     }
+    public void getPetDetail(long pet_id,final PetDetailCallback callback) {
+        apiService.getPetDetail(pet_id)
+                .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new DisposableObserver<Pet>() {
+                    @Override
+                    public void onNext(@NonNull Pet petResponse) {
+                        if (petResponse != null)
+                            callback.onSuccess(petResponse);
+                    }
 
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callback.onError(new ErrorType(e));
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 
     public interface PetCallback {
         void onSuccess(ArrayList<Pet> response);
-
+        void onError(ErrorType e);
+    }
+    public interface PetDetailCallback {
+        void onSuccess(Pet response);
         void onError(ErrorType e);
     }
 }

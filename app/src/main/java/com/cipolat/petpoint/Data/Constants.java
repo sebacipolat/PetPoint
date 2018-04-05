@@ -5,6 +5,6 @@ package com.cipolat.petpoint.Data;
  */
 
 public class Constants {
-    public static String API_URL="http://petstore.swagger.io/v2/pet/";
+    public static String API_URL="http://petstore.swagger.io/v2/";
 
 }
