@@ -32,7 +32,7 @@ ext {
     constraintVersion = '1.0.2'
     glideVersion = '4.6.1'
     mapsVersion = '12.0.1'
-    locationVersion = '12.0.0'
+    locationVersion = '12.0.1'
 }
 
 dependencies {
@@ -65,4 +65,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+}
+
+repositories {
+    google()
 }

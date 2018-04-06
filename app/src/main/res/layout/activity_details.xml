@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/map_fragmnt"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:name="com.cipolat.petpoint.UI.Detail.MapStoresFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,3 +73,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar" />
 </android.support.constraint.ConstraintLayout>
+
