@@ -1,17 +1,16 @@
 <resources>
     <string name="app_name">PetPoint</string>
-
     <string name="home_get_list_ok">Lista de Mascotas al Dia!</string>
     <string name="snack_retry">Reintentar!</string>
     <string name="error_network">No hay conexion a internet</string>
     <string name="error_data">Ha ocurrido un error al obtener los datos!</string>
-
     <string name="image_description">Imagen de carga</string>
-
     <string name="store_lbl">PetPoint Store</string>
-
-    <string name="permission_location">Nos gustaria conocer tu ubicacion para mostrarte la tienda mas cercana!\nPara ello deberas permitirnos el acceso a la localizacion.</string>
-    <string name="permission_location_title">Aviso</string>
+    <string name="your_location_lbl">Te encuentras aqui!</string>
+    <string name="permission_location">Nos gustaria saber en donde te encuentras para mostrarte la tienda mas cercana!\nDeberas permitirnos activar la ubicacion.</string>
+    <string name="permission_location_denied">Hay tiendas cerca tuyo!\nDebeseas conocerlas?.</string>
+    <string name="permission_location_reminder">Si permites acceder a la ubicacion</string>
+    <string name="permission_location_title">Solicitud</string>
     <string name="permission_location_ok">Aceptar</string>
-
+    <string name="permission_location_cancelar">Cancelar</string>
 </resources>

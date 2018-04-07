@@ -12,6 +12,7 @@ import com.cipolat.petpoint.UI.Base.Presenter;
 public class PetDetailPresenter implements Presenter<DetailView> {
     private DetailView mDetailView;
     private PetStoreApiInteractor mInteractor;
+    private long petID;
 
     public PetDetailPresenter() {
         mInteractor = new PetStoreApiInteractor();
@@ -23,8 +24,9 @@ public class PetDetailPresenter implements Presenter<DetailView> {
         mDetailView = view;
     }
 
-    public void getPetDetails(long data) {
-        mInteractor.getPetDetail(data, new PetStoreApiInteractor.PetDetailCallback() {
+    public void getPetDetails(long pet_id) {
+        petID=pet_id;
+        mInteractor.getPetDetail(pet_id, new PetStoreApiInteractor.PetDetailCallback() {
             @Override
             public void onSuccess(Pet response) {
                 mDetailView.onGetDetailOk(response);
@@ -37,6 +39,10 @@ public class PetDetailPresenter implements Presenter<DetailView> {
         });
     }
 
+    public void retry(){
+        if(petID>0)
+            getPetDetails(petID);
+    }
     @Override
     public void detachView() {
         mDetailView = null;

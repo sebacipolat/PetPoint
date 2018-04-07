@@ -9,6 +9,7 @@
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
+    style="@style/SelectableItemBackground"
     card_view:cardBackgroundColor="@android:color/transparent">
 
     <LinearLayout

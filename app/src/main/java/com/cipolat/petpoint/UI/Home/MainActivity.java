@@ -7,10 +7,9 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import com.bumptech.glide.Glide;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     private HomePresenter mPresenter;
     private PetsAdapter mAdapter;
-    private LinearLayoutManager mLinearManager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +49,15 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         swipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
         swipeLayout.setOnRefreshListener(this);
 
-        mPresenter = new HomePresenter(this);
+        mPresenter = new HomePresenter();
         mPresenter.setView(this);
         getList();
 
     }
 
-    private void fillList(final ArrayList<Pet> lista) {
+    private void fillList(ArrayList<Pet> lista) {
         mAdapter = new PetsAdapter(this, lista);
-        mLinearManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-        listRecylr.setLayoutManager(mLinearManager);
+        listRecylr.setLayoutManager(new GridLayoutManager(this, 2));
         listRecylr.setHasFixedSize(true);
         listRecylr.setAdapter(mAdapter);
         listRecylr.setVisibility(View.VISIBLE);
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
     }
 
     @Override
-    public void onError(ErrorType error) {
+    public void onError(ErrorType error){
         showErrorPlaceHolder();
         if (error.isNetworkError())
             showErrorSnack(getString(R.string.error_network));
@@ -96,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         showLoaderInidicator(false);
     }
 
-    private void getList() {
+    private void getList(){
         showLoading(true);
         mPresenter.getPetsList();
     }

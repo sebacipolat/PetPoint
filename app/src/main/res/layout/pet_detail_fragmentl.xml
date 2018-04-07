@@ -2,6 +2,7 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardPlaceItm"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -59,8 +60,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/round_font"
-            android:textColor="@color/grey"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+            android:textColor="@color/grey"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.11"
@@ -77,14 +78,44 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@color/ligth_blue"
-            android:textColor="@color/white"
             android:padding="5dp"
+            android:textColor="@color/white"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintHorizontal_bias="0.13"
             app:layout_constraintStart_toEndOf="@+id/profile_image"
             app:layout_constraintTop_toBottomOf="@+id/petName"
-            app:layout_constraintVertical_bias="0.0"
-            android:visibility="invisible"/>
+            app:layout_constraintVertical_bias="0.0" />
+
+        <ViewStub
+            android:id="@+id/vsError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inflatedId="@+id/errorView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.060000002"
+            android:layout="@layout/pet_detail_error" />
+
+        <ProgressBar
+            android:id="@+id/loader"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="79dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:indeterminate="false"
+            android:indeterminateDrawable="@drawable/red_circular_progress_bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.060000002" />
     </android.support.constraint.ConstraintLayout>
 </android.support.v7.widget.CardView>

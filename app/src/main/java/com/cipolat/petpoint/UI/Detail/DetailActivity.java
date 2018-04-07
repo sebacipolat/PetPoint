@@ -1,17 +1,19 @@
 package com.cipolat.petpoint.UI.Detail;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
-import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -19,15 +21,17 @@ import butterknife.ButterKnife;
  * Created by sebastian on 04/04/18.
  */
 
-public class DetailActivity extends AppCompatActivity implements LoaderCallback {
+public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
     @BindView(R.id.petNameLbl)
     TextView petNameLbl;
-    @BindView(R.id.progress_bar_search)
-    ProgressBar progressBar;
+
+    @BindView(R.id.constrLy)
+    ConstraintLayout constrLy;
     private PetDetailsFragment petDetailFrg;
+    private MapStoresFragment mapFrg;
 
     public static final String PET_KEY = "PET_KEY";
 
@@ -46,7 +50,8 @@ public class DetailActivity extends AppCompatActivity implements LoaderCallback 
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         petDetailFrg = (PetDetailsFragment) getFragmentManager().findFragmentById(R.id.detailpet_fragmnt);
-        petDetailFrg.setListener(this);
+        mapFrg = (MapStoresFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragmnt);
+
         //get pet selected and setTitle
         if (getIntent().getSerializableExtra(PET_KEY) != null) {
             Pet petSelected = (Pet) getIntent().getSerializableExtra(PET_KEY);
@@ -57,7 +62,9 @@ public class DetailActivity extends AppCompatActivity implements LoaderCallback 
     }
 
     @Override
-    public void onLoading(boolean value) {
-        progressBar.setVisibility(View.GONE);
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (mapFrg != null)
+            mapFrg.onActivityResult(requestCode, resultCode, data);
     }
 }

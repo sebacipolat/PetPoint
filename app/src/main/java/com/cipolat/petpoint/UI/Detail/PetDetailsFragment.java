@@ -6,6 +6,9 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewStub;
+import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -16,6 +19,7 @@ import com.cipolat.petpoint.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -26,20 +30,21 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class PetDetailsFragment extends Fragment implements DetailView {
     @BindView(R.id.profile_image)
     CircleImageView profileImage;
-
     @BindView(R.id.petName)
     TextView petName;
-
     @BindView(R.id.petStatus)
     TextView petStatus;
-
     @BindView(R.id.cardPlaceItm)
     CardView cardPlaceItm;
+    @BindView(R.id.vsError)
+    ViewStub vsError;
+    @BindView(R.id.loader)
+    ProgressBar loader;
 
-    Unbinder unbinder;
+    private Unbinder unbinder;
+    private View viewInflated;
 
     private PetDetailPresenter mPresenter;
-    private LoaderCallback mCallback;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,10 +58,6 @@ public class PetDetailsFragment extends Fragment implements DetailView {
 
     public void setPetID(long id) {
         mPresenter.getPetDetails(id);
-    }
-
-    public void setListener(LoaderCallback cllbk) {
-        this.mCallback = cllbk;
     }
 
     private void fillPetData(Pet data) {
@@ -87,17 +88,54 @@ public class PetDetailsFragment extends Fragment implements DetailView {
 
     @Override
     public void onGetDetailOk(Pet pet) {
-        if (mCallback != null)
-            mCallback.onLoading(false);
+        showLoading(false);
         fillPetData(pet);
+    }
+
+    public void showLoading(boolean visible) {
+        if (visible) {
+            loader.setVisibility(View.VISIBLE);
+            if (viewInflated != null)
+                viewInflated.setVisibility(View.GONE);
+        } else
+            loader.setVisibility(View.GONE);
     }
 
     @Override
     public void onError(ErrorType error) {
-      /*  if (error.isNetworkError())
-            showErrorSnack(getString(R.string.error_network));
-        else
-            showErrorSnack(getString(R.string.error_data));
-*/
+        showLoading(false);
+        profileImage.setVisibility(View.GONE);
+        if (viewInflated == null)
+            viewInflated = vsError.inflate();
+        ErrorView stubView = new ErrorView(viewInflated);
+
+        if (error.isNetworkError()) {
+            stubView.setText(getString(R.string.error_network));
+        } else {
+            stubView.setText(getString(R.string.error_data));
+        }
     }
+
+    public class ErrorView {
+        @BindView(R.id.errorTitle)
+        TextView errorTitle;
+        @BindView(R.id.retryBtn)
+        Button retryBtn;
+
+        public ErrorView(View view) {
+            ButterKnife.bind(this, view);
+        }
+
+        public void setText(String lbl) {
+            errorTitle.setText(lbl);
+        }
+
+        @OnClick(R.id.retryBtn)
+        public void onRetry() {
+            showLoading(true);
+            if (mPresenter != null)
+                mPresenter.retry();
+        }
+    }
+
 }
