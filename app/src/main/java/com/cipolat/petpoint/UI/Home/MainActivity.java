@@ -182,7 +182,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
     @Override
     public void onRefresh() {
         showLoaderInidicator(true);
-        mPresenter.getPetsList();
+        mPresenter.refreshPetList();
     }
 
     /**

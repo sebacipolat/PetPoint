@@ -49,6 +49,15 @@ public class HomePresenter implements Presenter<HomeView> {
     }
 
     /**
+     * Pull to refresh
+     * reload pets list
+     */
+    public void refreshPetList(){
+        petList=null;
+        getPetsList();
+    }
+
+    /**
      * detach view to presenter
      */
     @Override
