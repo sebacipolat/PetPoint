@@ -19,6 +19,10 @@ public class PetStoreApiInteractor {
         apiService = ApiClient.getClient().create(PetStoreApi.class);
     }
 
+    /**
+     * hit api to retrieve available pets
+     * @param callback listener
+     */
     public void findPetsAvailable(final PetCallback callback) {
         apiService.getAvailablePets(Pet.AVAILABLE)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
@@ -40,6 +44,12 @@ public class PetStoreApiInteractor {
                     }
                 });
     }
+
+    /**
+     * Get pet details from api by pet id
+     * @param pet_id  pet id
+     * @param callback callback
+     */
     public void getPetDetail(long pet_id,final PetDetailCallback callback) {
         apiService.getPetDetail(pet_id)
                 .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())

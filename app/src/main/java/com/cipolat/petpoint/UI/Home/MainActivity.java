@@ -59,6 +59,10 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         getList();
     }
 
+    /**
+     * Fill recyclerview with list pets
+     * @param lista pets array from api
+     */
     private void fillList(ArrayList<Pet> lista) {
         mAdapter = new PetsAdapter(this, lista);
         listRecylr.setLayoutManager(new GridLayoutManager(this, 2));
@@ -78,12 +82,18 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         });
     }
 
-
-    private void getList() {
+    /**
+     * Retrieve pet list from api
+     */
+    private void getList(){
         showLoading(true);
         mPresenter.getPetsList();
     }
 
+    /**
+     * show or hide loading animation
+     * @param visible boolean value visibility
+     */
     private void showLoading(boolean visible) {
         if (visible) {
             Glide.with(this).load(R.drawable.loaderdog).into(loader);
@@ -95,10 +105,17 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         }
     }
 
+    /**
+     * show or hide swipelayout animation loading
+     * @param var
+     */
     private void showLoaderInidicator(boolean var) {
         swipeLayout.setRefreshing(var);
     }
 
+    /**
+     * Show the error placeholder
+     */
     private void showErrorPlaceHolder() {
         Glide.with(this).clear(loader);
         loader.setVisibility(View.VISIBLE);
@@ -106,6 +123,11 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         loader.setImageResource(R.drawable.error_cloud);
     }
 
+
+    /**
+     * Array pets coming from Api
+     * @param list Arraylist<pet>
+     */
     @Override
     public void onGetPetsOk(ArrayList<Pet> list) {
         //show sort item menu
@@ -116,13 +138,29 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         showSimpleTextSnack(getString(R.string.home_get_list_ok));
     }
 
+    /**
+     *Array pet coming from finish sort
+     * @param list array pet
+     */
     @Override
     public void onUpdateList(ArrayList<Pet> list) {
         showSimpleTextSnack(getString(R.string.sort_finish));
         showLoaderInidicator(false);
         mAdapter.notifyDataSetChanged();
     }
-
+    /**
+     *Array pet coming from pulltorefresh
+     */
+    @Override
+    public void onRefresh() {
+        showLoaderInidicator(true);
+        mPresenter.getPetsList();
+    }
+    /**
+     * When request error happened show error placeholder
+     * and show snackbar
+     * @param error error type
+     */
     @Override
     public void onError(ErrorType error) {
         showErrorPlaceHolder();
@@ -134,6 +172,10 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         showLoaderInidicator(false);
     }
 
+    /**
+     * show snackbar for error retry
+     * @param label  text message
+     */
     private void showErrorSnack(String label) {
         Snackbar.make(coordLay, label, Snackbar.LENGTH_INDEFINITE)
                 .setActionTextColor(getResources().getColor(R.color.yellow))
@@ -145,11 +187,18 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
                 })
                 .show();
     }
-
+    /**
+     * show simple text snackbar
+     * @param text  text message
+     */
     private void showSimpleTextSnack(String text) {
         Snackbar.make(coordLay, text, Snackbar.LENGTH_LONG).show();
     }
 
+    /**
+     * Change toolbar sort item visibility
+     * @param visbl boolean visible value
+     */
     private void hideSortItem(boolean visbl) {
         MenuItem sortItem = mMenu.findItem(R.id.sort);
         sortItem.setVisible(visbl);
@@ -202,11 +251,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         }
     }
 
-    @Override
-    public void onRefresh() {
-        showLoaderInidicator(true);
-        mPresenter.getPetsList();
-    }
+
 
     @Override
     protected void onDestroy() {

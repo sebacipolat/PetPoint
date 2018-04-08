@@ -64,6 +64,9 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         unbinder.unbind();
     }
 
+    /***
+     * Load Google Maps and load the statics store location
+     */
     private void loadMap() {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -82,6 +85,14 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         });
     }
 
+    /**
+     * Add a marker to a google map
+     * @param googleMap GoogleMap reference
+     * @param lat       latitude
+     * @param longit    longitude
+     * @param label     marker title ext
+     * @param bmpDscr   Color marker
+     */
     private void addMapMarker(GoogleMap googleMap, double lat, double longit, String label, float bmpDscr) {
         MarkerOptions markOptn = new MarkerOptions();
         markOptn.position(new LatLng(lat, longit));
@@ -90,6 +101,11 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         googleMap.addMarker(markOptn);
     }
 
+    /**
+     * Add the user location marker to the map
+     * @param googleMap GoogleMap reference
+     * @param ltn       Location user data
+     */
     private void addMyLocation(GoogleMap googleMap, Location ltn) {
         addMapMarker(googleMap, ltn.getLatitude(), ltn.getLongitude(), getString(R.string.your_location_lbl), BitmapDescriptorFactory.HUE_GREEN);
         LatLng myPos = new LatLng(ltn.getLatitude(), ltn.getLongitude());
@@ -97,12 +113,22 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         zoomCamera(googleMap, myPos, 15.0f);
     }
 
+    /**
+     * Set zoom camera to an a marker
+     * @param googleMap GoogleMap reference
+     * @param ltlng    Location user data
+     * @param zoom    Zoom level
+     */
     private void zoomCamera(GoogleMap googleMap, LatLng ltlng, float zoom) {
         CameraPosition cameraPosition = new CameraPosition.Builder().target(ltlng).zoom(zoom).build();
         CameraUpdate cameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition);
         googleMap.moveCamera(cameraUpdate);
     }
 
+    /**
+     * Check permission
+     * if all enabled wil start location else request permission
+     */
     private void verifyPermission() {
         if (!checkPermissions()) {
             requestPermissions();
@@ -112,17 +138,27 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         }
     }
 
+    /**
+     * Check runtime permission to location
+     * @return permission allow status
+     */
     private boolean checkPermissions() {
         int permissionState = ContextCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION);
         return permissionState == PackageManager.PERMISSION_GRANTED;
     }
 
+    /**
+     * Request android system the location access.
+     */
     private void startLocationPermissionRequest() {
         requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION,
                         Manifest.permission.ACCESS_FINE_LOCATION},
                 REQUEST_PERMISSIONS_REQUEST_CODE);
     }
 
+    /**
+     * Check if cancel permission was selected
+     */
     private void requestPermissions() {
         boolean shouldProvideRationale = shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION);
         if (shouldProvideRationale) {
@@ -134,7 +170,7 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
 
 
     /**
-     * Callback received when a permissions request has been completed.
+     * Runtime Permission result data
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -158,6 +194,10 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
             mFusedHelper.onActivityResult(requestCode, resultCode, data);
     }
 
+    /**
+     * Show permission location dialog
+     * @param text dialog text
+     */
     private void showPermissionDialog(String text) {
         ContextThemeWrapper themedContext = new ContextThemeWrapper(getActivity(), R.style.AlertDialogCustom);
         AlertDialog alertDialog = new AlertDialog.Builder(themedContext).create();
@@ -191,6 +231,10 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
     public void onLasLocation(Location lastLoc) {
     }
 
+    /**
+     * Location update incoming data
+     * @param locationNow now location latlng
+     */
     @Override
     public void onLocationUpdated(Location locationNow) {
         if (mMap != null)

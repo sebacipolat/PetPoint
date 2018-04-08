@@ -24,6 +24,9 @@ public class HomePresenter implements Presenter<HomeView> {
         mHomeView = view;
     }
 
+    /**
+     * Get petlist from API
+     */
     public void getPetsList() {
         mInteractor.findPetsAvailable(new PetStoreApiInteractor.PetCallback() {
             @Override
@@ -38,12 +41,18 @@ public class HomePresenter implements Presenter<HomeView> {
             }
         });
     }
-
+    /**
+     * detach view to presenter
+     */
     @Override
     public void detachView() {
         mHomeView = null;
     }
 
+    /**
+     * Sort array pets ascending or descending ordered by pet ID
+     * @param sort TRUE ascending / FALSE descending
+     */
     public void sort(boolean sort) {
         if (sort)
             Collections.sort(petList, Pet.PetComparatorAscending);

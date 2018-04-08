@@ -56,10 +56,20 @@ public class PetDetailsFragment extends Fragment implements DetailView {
         return view;
     }
 
+    /**
+     * Set petid this will be used to retrieve the pet
+     * data
+     * @param id long pet ID
+     */
     public void setPetID(long id) {
         mPresenter.getPetDetails(id);
     }
 
+    /**
+     * fill ui with pet details
+     * try retrieve image and set status label
+     * @param data Pet object
+     */
     private void fillPetData(Pet data) {
         if (data.getPhotoUrls() != null && data.getPhotoUrls().size() > 0) {
             RequestOptions options = new RequestOptions()
@@ -86,12 +96,20 @@ public class PetDetailsFragment extends Fragment implements DetailView {
         unbinder.unbind();
     }
 
+    /**
+     * Pet data coming from api
+     * @param pet
+     */
     @Override
     public void onGetDetailOk(Pet pet) {
         showLoading(false);
         fillPetData(pet);
     }
 
+    /**
+     * Modify visibility of loading spinner
+     * @param visible
+     */
     public void showLoading(boolean visible) {
         if (visible) {
             loader.setVisibility(View.VISIBLE);
@@ -101,6 +119,11 @@ public class PetDetailsFragment extends Fragment implements DetailView {
             loader.setVisibility(View.GONE);
     }
 
+    /**
+     * Error coming from api request
+     * show retry option and display info
+     * @param error type error
+     */
     @Override
     public void onError(ErrorType error) {
         showLoading(false);

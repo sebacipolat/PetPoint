@@ -1,7 +1,7 @@
 package com.cipolat.petpoint.UI.Detail.Location;
 
 /**
- * Created by sebastian on 07/04/18.
+ * Created by Sebastian Cipolat on 07/04/18.
  */
 
 import android.app.Activity;
@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
 import android.support.annotation.NonNull;
-
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -51,18 +50,30 @@ public class FusedLocationHelper {
             creatLocationRequest();
     }
 
+    /**
+     * set callback listener
+     * @param mCallback location resutls listener
+     */
     public void setmCallback(LocationListener mCallback) {
         this.mCallback = mCallback;
     }
 
+    /**
+     * Initiate fused location request
+     * set intervals and priority
+     */
     private void creatLocationRequest() {
-        // Create the location request to start receiving updates
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         mLocationRequest.setInterval(UPDATE_INTERVAL);
         mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
     }
 
+    /**
+     * Check device location settings
+     * Enabled location automatically or by user prompt
+     * start userlocation if all is ok
+     */
     public void initLocationParameters() {
         // Create LocationSettingsRequest object using location request
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
@@ -119,6 +130,10 @@ public class FusedLocationHelper {
         });
     }
 
+    /**
+     * Start Location updates
+     *
+     */
     @SuppressWarnings("MissingPermission")
     public void getLocation() {
         mLoctnCllbk = new LocationCallback() {
@@ -140,6 +155,9 @@ public class FusedLocationHelper {
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLoctnCllbk, null);
     }
 
+    /**
+     * Retrieve last location
+     */
     @SuppressWarnings("MissingPermission")
     private void getLastLocation() {
         mFusedLocationClient.getLastLocation()
@@ -161,10 +179,21 @@ public class FusedLocationHelper {
                 });
     }
 
+    /**
+     * Allow locate the user just once.
+     * @param locateUserOnce true located once and disable location
+     *                       false location will be repeat by interval
+     */
     public void setLocateUserOnce(boolean locateUserOnce) {
         this.locateUserOnce = locateUserOnce;
     }
 
+    /**
+     * Request code coming from DetailActivity
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_CHECK_SETTINGS:
@@ -183,6 +212,9 @@ public class FusedLocationHelper {
         }
     }
 
+    /**
+     * disable location updates
+     */
     public void onDestroy() {
         if (mFusedLocationClient != null && mLoctnCllbk != null)
             mFusedLocationClient.removeLocationUpdates(mLoctnCllbk);

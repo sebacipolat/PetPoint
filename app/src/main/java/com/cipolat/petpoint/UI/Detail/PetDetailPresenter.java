@@ -24,6 +24,10 @@ public class PetDetailPresenter implements Presenter<DetailView> {
         mDetailView = view;
     }
 
+    /**
+     * Get pet details by pet id
+     * @param pet_id
+     */
     public void getPetDetails(long pet_id) {
         petID=pet_id;
         mInteractor.getPetDetail(pet_id, new PetStoreApiInteractor.PetDetailCallback() {
@@ -39,10 +43,17 @@ public class PetDetailPresenter implements Presenter<DetailView> {
         });
     }
 
+    /**
+     * Retry last pet detail api call
+     */
     public void retry(){
         if(petID>0)
             getPetDetails(petID);
     }
+
+    /**
+     * detach view
+     */
     @Override
     public void detachView() {
         mDetailView = null;
