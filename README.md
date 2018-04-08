@@ -55,6 +55,7 @@ El ordenamiento de las carpetas esta agrupado por pantalla.
 Se utilizo inyeccion de vistas usando Butterknife
 <br>
 Para la interaccion con el API se utilizo Retrofit 2 en conjunto con RxJava + RxAndroid.
+<br>
 Al momento de obtener la ubicacion del usuario en la pantalla detalles se utilizo Google FusedLocation API.
 
 
