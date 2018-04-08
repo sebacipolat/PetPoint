@@ -59,7 +59,7 @@ Al momento de obtener la ubicacion del usuario en la pantalla detalles se utiliz
 
 
 ## Librerias usadas
-⋅⋅*Butterknife
+⋅⋅* Butterknife
 ⋅⋅*RxJava
 ⋅⋅*RxAndroid
 ⋅⋅*okhttp3
