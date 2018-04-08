@@ -36,6 +36,10 @@ y la ubicacion del usuario.
 ## Home Listado pets
 <img src='https://github.com/sebacipolat/PetPoint/blob/master/images/home.png' height="350"/>
 
+## Pull to refresh
+<img src='https://github.com/sebacipolat/PetPoint/blob/master/images/pulltorefresh.png' height="350"/>
+
+
 ## Ordenamiento 
 <img src='https://github.com/sebacipolat/PetPoint/blob/master/images/sort.png' height="350"/>
 
