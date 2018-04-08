@@ -1,6 +1,7 @@
 # PetPoint
 
 Solucion Desafío Técnico Android - FluxIT2018
+<br>
 <img src='https://github.com/sebacipolat/PetPoint/blob/master/app/src/main/res/mipmap-xxhdpi/ic_launcher.png' height="100"/>
 
 ## Squire
