@@ -76,6 +76,9 @@ Al momento de obtener la ubicacion del usuario en la pantalla detalles se utiliz
 ## ANTES DE COMENZAR
 Borrar la carpeta images (contiene las imagenes q se ven aqui)
 
+**Despues de clonar el proyecto**
+Una vez clonado el proyecto en Android Studio ir a build->clean y luego sync gradle
+
 ## PROBLEMA DE PERFOMANCE EN API
 Se aclara que el api asignada http://petstore.swagger.io
 no permite paginado por lo que el primer request en ocasiones suele tardar unos segs dependiendo de la conexion
