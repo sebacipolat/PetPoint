@@ -11,20 +11,40 @@ Solucion Desafío Técnico Android - FluxIT2018
 La aplicacion se llama "PetPoint" es el nombre que le asigne a la app para una tienda de mascotas
 que se pidio en el desafio tecnico.
 
-Esta compuesta por 2 pantallas
+Esta compuesta por 2 pantallas:
 <br>
 Listado Pets - MainActivity
 <br>
-Muestra listado de pets, pull to refresh y opcion en toolbar para reodenar el listado
+Muestra listado de pets, pull to refresh y opcion en toolbar para reordenar el listado
 <br>
 DetallesPet  - DetailActivity
 <br>
-PetDetailsFragment
-<br> MapStoreFragment)
+PetDetailsFragment:
+<br>
+Detalles de la mascota: Nombre, disponibilidad, imagen.
+<br>
+MapStoreFragment:
+<br>
+Compuesta por un SupportMapFragment muestra la ubicacion de las 2 tiendas mencionadas
+y la ubicacion del usuario.
+<br>
+## Capturas de pantalla:
+
+## Loading 
+<img src='https://github.com/sebacipolat/PetPoint/blob/master/images/loading.png' height="350"/>
+## Home Listado pets
+<img src='https://github.com/sebacipolat/PetPoint/blob/master/images/home.png' height="350"/>
+## Ordenamiento 
+<img src='https://github.com/sebacipolat/PetPoint/blob/master/images/sort.png' height="350"/>
+## Detalles Pet 
+<img src='https://github.com/sebacipolat/PetPoint/blob/master/images/map.png' height="350"/>
+
                
 ## Detalles 
 La aplicacion esta basada en MVP.
-Para la interaccion con el API se utilizo Retrofit 2
+
+Para la interaccion con el API se utilizo Retrofit 2 en conjunto con RxJava + RxAndroid.
+Al momento de obtener la ubicacion del usuario se 
 
 Squire is a single OpenSource Example News Reader Android APP.
 
