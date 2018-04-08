@@ -15,8 +15,16 @@ Esta compuesta por 2 pantallas
 <br>
 Listado Pets - MainActivity
 <br>
-Detalles     - DetailActivity (PetDetailsFragment- MapStoreFragment)
+Muestra listado de pets, pull to refresh y opcion en toolbar para reodenar el listado
+<br>
+DetallesPet  - DetailActivity
+<br>
+PetDetailsFragment
+<br> MapStoreFragment)
                
+## Detalles 
+La aplicacion esta basada en MVP.
+Para la interaccion con el API se utilizo Retrofit 2
 
 Squire is a single OpenSource Example News Reader Android APP.
 
