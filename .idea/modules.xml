@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$USER_HOME$/PROYECTOS/fluxit/PetPoint/PetPoint.iml" filepath="$USER_HOME$/PROYECTOS/fluxit/PetPoint/PetPoint.iml" />
-      <module fileurl="file://$USER_HOME$/PROYECTOS/fluxit/PetPoint2/PetPoint2.iml" filepath="$USER_HOME$/PROYECTOS/fluxit/PetPoint2/PetPoint2.iml" />
       <module fileurl="file://$USER_HOME$/PROYECTOS/fluxit/PetPoint/app/app.iml" filepath="$USER_HOME$/PROYECTOS/fluxit/PetPoint/app/app.iml" />
-      <module fileurl="file://$USER_HOME$/PROYECTOS/fluxit/PetPoint2/app/app.iml" filepath="$USER_HOME$/PROYECTOS/fluxit/PetPoint2/app/app.iml" />
     </modules>
   </component>
 </project>
