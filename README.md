@@ -4,14 +4,19 @@
 
 Solucion Desafío Técnico Android - FluxIT2018
 
-## Squire
 ###### by Sebastian Cipolat
-[@seba_cipolat](http://twitter.com/seba_cipolat)
-
 [www.sebastiancipolat.com](www.sebastiancipolat.com)
-
 [sebastiancipolat Linkedin](www.linkedin.com/in/sebastiancipolat)
 
+La aplicacion se llama "PetPoint" es el nombre que le asigne a la app para una tienda de mascotas
+que se pidio en el desafio tecnico.
+
+Esta compuesta por 2 pantallas
+Listado Pets - MainActivity
+Detalles     - DetailActivity
+               -PetDetailsFragment
+               -MapStoreFragment
+               
 
 Squire is a single OpenSource Example News Reader Android APP.
 
