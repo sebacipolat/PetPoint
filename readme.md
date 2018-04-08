@@ -75,8 +75,9 @@ Al momento de obtener la ubicacion del usuario en la pantalla detalles se utiliz
 
 ## ANTES DE COMENZAR
 Borrar la carpeta images (contiene las imagenes q se ven aqui)
-
+<br>
 **Despues de clonar el proyecto**
+<br>
 Una vez clonado el proyecto en Android Studio ir a build->clean y luego sync gradle
 
 ## PROBLEMA DE PERFOMANCE EN API
