@@ -6,9 +6,7 @@ import com.cipolat.petpoint.Data.Network.PetStoreApiInteractor;
 import com.cipolat.petpoint.UI.Base.Presenter;
 import java.util.ArrayList;
 import java.util.Collections;
-/**
- * Created by sebastian on 23/07/17.
- */
+
 public class HomePresenter implements Presenter<HomeView> {
     private HomeView mHomeView;
     private PetStoreApiInteractor mInteractor;
@@ -28,19 +26,24 @@ public class HomePresenter implements Presenter<HomeView> {
      * Get petlist from API
      */
     public void getPetsList() {
-        mInteractor.findPetsAvailable(new PetStoreApiInteractor.PetCallback() {
-            @Override
-            public void onSuccess(ArrayList<Pet> response) {
-                petList = response;
-                mHomeView.onGetPetsOk(response);
-            }
+        if (petList == null) {
+            mInteractor.findPetsAvailable(new PetStoreApiInteractor.PetCallback() {
+                @Override
+                public void onSuccess(ArrayList<Pet> response) {
+                    petList = response;
+                    mHomeView.onGetPetsOk(response,true);
+                }
 
-            @Override
-            public void onError(ErrorType e) {
-                mHomeView.onError(e);
-            }
-        });
+                @Override
+                public void onError(ErrorType e) {
+                    mHomeView.onError(e);
+                }
+            });
+        } else {
+            mHomeView.onGetPetsOk(petList,false);
+        }
     }
+
     /**
      * detach view to presenter
      */
@@ -51,6 +54,7 @@ public class HomePresenter implements Presenter<HomeView> {
 
     /**
      * Sort array pets ascending or descending ordered by pet ID
+     *
      * @param sort TRUE ascending / FALSE descending
      */
     public void sort(boolean sort) {

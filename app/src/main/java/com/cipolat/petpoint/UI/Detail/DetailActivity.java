@@ -3,23 +3,15 @@ package com.cipolat.petpoint.UI.Detail;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by sebastian on 04/04/18.
- */
 
 public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
@@ -30,7 +22,7 @@ public class DetailActivity extends AppCompatActivity {
 
     @BindView(R.id.constrLy)
     ConstraintLayout constrLy;
-    private PetDetailsFragment petDetailFrg;
+
     private MapStoresFragment mapFrg;
 
     public static final String PET_KEY = "PET_KEY";
@@ -49,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
-        petDetailFrg = (PetDetailsFragment) getFragmentManager().findFragmentById(R.id.detailpet_fragmnt);
+        PetDetailsFragment  petDetailFrg = (PetDetailsFragment) getFragmentManager().findFragmentById(R.id.detailpet_fragmnt);
         mapFrg = (MapStoresFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragmnt);
 
         //get pet selected and setTitle

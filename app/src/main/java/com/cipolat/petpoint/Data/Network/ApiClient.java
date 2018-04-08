@@ -1,9 +1,5 @@
 package com.cipolat.petpoint.Data.Network;
 
-/**
- * Created by sebastian on 22/07/17.
- */
-
 import com.cipolat.petpoint.Data.Constants;
 
 import okhttp3.OkHttpClient;

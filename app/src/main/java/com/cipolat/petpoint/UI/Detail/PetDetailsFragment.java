@@ -23,9 +23,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * Created by sebastian on 04/04/18.
- */
+
 
 public class PetDetailsFragment extends Fragment implements DetailView {
     @BindView(R.id.profile_image)

@@ -1,6 +1,4 @@
-package com.cipolat.petpoint.UI.Home; /**
- * Created by sebastian on 04/04/18.
- */
+package com.cipolat.petpoint.UI.Home;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,10 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
-
 import java.util.Random;
 import butterknife.BindView;
 import butterknife.ButterKnife;

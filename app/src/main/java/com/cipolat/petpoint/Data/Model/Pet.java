@@ -1,14 +1,10 @@
 package com.cipolat.petpoint.Data.Model;
 
 import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-/**
- * Created by sebastian on 04/04/18.
- */
 
 public class Pet implements Comparable<Pet>, Serializable {
 

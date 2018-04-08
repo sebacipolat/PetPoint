@@ -1,8 +1,5 @@
 package com.cipolat.petpoint.UI.Detail.Location;
 
-/**
- * Created by Sebastian Cipolat on 07/04/18.
- */
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,16 +20,12 @@ import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
-/**
- * Created by sebastian on 07/04/18.
- */
-
 public class FusedLocationHelper {
 
     private FusedLocationProviderClient mFusedLocationClient;
-    private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
-    private long FASTEST_INTERVAL = 2000; /* 2 sec */
-    protected static final int REQUEST_CHECK_SETTINGS = 100;
+    private final long  UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
+    private final long FASTEST_INTERVAL = 2000; /* 2 sec */
+    private static final int REQUEST_CHECK_SETTINGS = 100;
 
     private Context mCtx;
     private Activity mActv;
@@ -149,7 +142,6 @@ public class FusedLocationHelper {
                 }
             }
 
-            ;
         };
         if (mLocationRequest != null)
             mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLoctnCllbk, null);

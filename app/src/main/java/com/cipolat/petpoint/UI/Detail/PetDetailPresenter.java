@@ -5,9 +5,7 @@ import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.Data.Network.PetStoreApiInteractor;
 import com.cipolat.petpoint.UI.Base.Presenter;
 
-/**
- * Created by sebastian on 23/07/17.
- */
+
 
 public class PetDetailPresenter implements Presenter<DetailView> {
     private DetailView mDetailView;

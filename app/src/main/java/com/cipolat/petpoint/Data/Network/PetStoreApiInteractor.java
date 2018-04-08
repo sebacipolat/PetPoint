@@ -8,9 +8,6 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by sebastian on 23/07/17.
- */
 
 public class PetStoreApiInteractor {
     private PetStoreApi apiService;

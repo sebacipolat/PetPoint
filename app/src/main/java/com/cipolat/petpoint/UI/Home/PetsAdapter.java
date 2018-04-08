@@ -9,9 +9,7 @@ import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
 import java.util.ArrayList;
 
-/**
- * Created by sebastian on 02/06/16.
- */
+
 public class PetsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
 
 

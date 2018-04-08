@@ -8,9 +8,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-/**
- * Created by sebastian on 16/06/16.
- */
 public interface PetStoreApi {
     @Headers({"Accept: application/json"})
     @GET("pet/findByStatus")

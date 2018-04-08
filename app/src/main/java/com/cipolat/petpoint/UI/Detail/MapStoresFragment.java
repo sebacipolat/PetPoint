@@ -30,9 +30,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-/**
- * Created by sebastian on 04/04/18.
- */
+
 public class MapStoresFragment extends Fragment implements FusedLocationHelper.LocationListener {
 
     private Unbinder unbinder;

@@ -5,10 +5,6 @@ import java.net.SocketTimeoutException;
 
 import retrofit2.HttpException;
 
-/**
- * Created by sebastian on 01/02/18.
- */
-
 public class ErrorType {
     private Throwable t;
 
@@ -17,17 +13,11 @@ public class ErrorType {
     }
 
     public boolean isNetworkError() {
-        if (t instanceof IOException || t instanceof SocketTimeoutException)
-            return true;
-        else
-            return false;
+        return t instanceof IOException || t instanceof SocketTimeoutException;
     }
 
     public boolean isServerError() {
-        if (t instanceof HttpException || t instanceof com.google.gson.JsonSyntaxException)
-            return true;
-        else
-            return false;
+        return t instanceof HttpException || t instanceof com.google.gson.JsonSyntaxException;
     }
 }
 
