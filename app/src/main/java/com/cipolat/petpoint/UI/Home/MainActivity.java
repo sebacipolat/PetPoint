@@ -16,15 +16,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.cipolat.petpoint.Data.Model.ErrorType;
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
 import com.cipolat.petpoint.UI.Detail.DetailActivity;
-
 import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,7 +42,6 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     private HomePresenter mPresenter;
     private PetsAdapter mAdapter;
-    private Menu mMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +52,12 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         setSupportActionBar(toolbar);
         swipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
         swipeLayout.setOnRefreshListener(this);
-
         attachPresenter();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         getList();
     }
 
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     /**
      * Keep presenter state on configuration changes
+     *
      * @return presenter
      */
     @Override
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
     /**
      * show or hide swipelayout animation loading
      *
-     * @param var
+     * @param var boolean
      */
     private void showLoaderInidicator(boolean var) {
         swipeLayout.setRefreshing(var);
@@ -148,20 +149,18 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         loader.setImageResource(R.drawable.error_cloud);
     }
 
-
     /**
      * Array pets coming from Api
      *
      * @param list Arraylist<pet>
      */
     @Override
-    public void onGetPetsOk(ArrayList<Pet> list,boolean newData) {
+    public void onGetPetsOk(ArrayList<Pet> list, boolean newData) {
         //show sort item menu
-        hideSortItem(true);
         showLoading(false);
         showLoaderInidicator(false);
         fillList(list);
-        if(newData)
+        if (newData)
             showSimpleTextSnack(getString(R.string.home_get_list_ok));
     }
 
@@ -193,7 +192,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
      * @param error error type
      */
     @Override
-    public void onError(ErrorType error) {
+    public void onError(ErrorType error){
         showErrorPlaceHolder();
         if (error.isNetworkError())
             showErrorSnack(getString(R.string.error_network));
@@ -229,23 +228,10 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         Snackbar.make(coordLay, text, Snackbar.LENGTH_LONG).show();
     }
 
-    /**
-     * Change toolbar sort item visibility
-     *
-     * @param visbl boolean visible value
-     */
-    private void hideSortItem(boolean visbl) {
-        if (mMenu != null) {
-            MenuItem sortItem = mMenu.findItem(R.id.sort);
-            sortItem.setVisible(visbl);
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
-        mMenu = menu;
-        hideSortItem(false);
         return true;
     }
 
@@ -273,21 +259,21 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         }
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.sort:
-                View view = findViewById(R.id.sort);
-                registerForContextMenu(view);
-                openContextMenu(view);
+                if(mPresenter.isSorteable){
+                    View view = findViewById(R.id.sort);
+                    registerForContextMenu(view);
+                    openContextMenu(view);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     @Override
     protected void onDestroy() {

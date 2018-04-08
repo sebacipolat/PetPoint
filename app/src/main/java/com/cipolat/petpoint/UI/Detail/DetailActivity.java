@@ -12,7 +12,6 @@ import com.cipolat.petpoint.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-
 public class DetailActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -42,6 +41,7 @@ public class DetailActivity extends AppCompatActivity {
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
         PetDetailsFragment  petDetailFrg = (PetDetailsFragment) getFragmentManager().findFragmentById(R.id.detailpet_fragmnt);
+        petDetailFrg.setRetainInstance(true);
         mapFrg = (MapStoresFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragmnt);
 
         //get pet selected and setTitle

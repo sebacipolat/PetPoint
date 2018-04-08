@@ -12,10 +12,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import com.cipolat.petpoint.R;
 import com.cipolat.petpoint.UI.Detail.Location.FusedLocationHelper;
 import com.google.android.gms.maps.CameraUpdate;
@@ -85,6 +85,7 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
 
     /**
      * Add a marker to a google map
+     *
      * @param googleMap GoogleMap reference
      * @param lat       latitude
      * @param longit    longitude
@@ -101,6 +102,7 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
 
     /**
      * Add the user location marker to the map
+     *
      * @param googleMap GoogleMap reference
      * @param ltn       Location user data
      */
@@ -113,9 +115,10 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
 
     /**
      * Set zoom camera to an a marker
+     *
      * @param googleMap GoogleMap reference
-     * @param ltlng    Location user data
-     * @param zoom    Zoom level
+     * @param ltlng     Location user data
+     * @param zoom      Zoom level
      */
     private void zoomCamera(GoogleMap googleMap, LatLng ltlng, float zoom) {
         CameraPosition cameraPosition = new CameraPosition.Builder().target(ltlng).zoom(zoom).build();
@@ -131,13 +134,17 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         if (!checkPermissions()) {
             requestPermissions();
         } else {
-            mFusedHelper.setLocateUserOnce(true);
-            mFusedHelper.initLocationParameters();
+            if (mFusedHelper != null) {
+                mFusedHelper.setLocateUserOnce(true);
+                mFusedHelper.initLocationParameters();
+                showWaiting();
+            }
         }
     }
 
     /**
      * Check runtime permission to location
+     *
      * @return permission allow status
      */
     private boolean checkPermissions() {
@@ -166,21 +173,26 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
         }
     }
 
+    private void showWaiting() {
+        Toast toast = Toast.makeText(getActivity(), getString(R.string.permission_location_wait), Toast.LENGTH_SHORT);
+        toast.show();
+    }
 
     /**
      * Runtime Permission result data
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        Log.i("requestPermissions", "onRequestPermissionResult");
         if (requestCode == REQUEST_PERMISSIONS_REQUEST_CODE) {
             if (grantResults.length <= 0) {
                 // If user interaction was interrupted, the permission request is cancelled and you
                 // receive empty arrays.
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 // Permission granted.
-                if (mFusedHelper != null)
+                if (mFusedHelper != null) {
                     mFusedHelper.initLocationParameters();
+                    showWaiting();
+                }
             }
         }
     }
@@ -194,6 +206,7 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
 
     /**
      * Show permission location dialog
+     *
      * @param text dialog text
      */
     private void showPermissionDialog(String text) {
@@ -231,6 +244,7 @@ public class MapStoresFragment extends Fragment implements FusedLocationHelper.L
 
     /**
      * Location update incoming data
+     *
      * @param locationNow now location latlng
      */
     @Override

@@ -13,6 +13,7 @@
     <string name="permission_location_title">Solicitud</string>
     <string name="permission_location_ok">Aceptar</string>
     <string name="permission_location_cancelar">Cancelar</string>
+    <string name="permission_location_wait">Obteniendo ubicacion.</string>
     <string name="sort_title">Ordenar Lista:</string>
     <string name="sort_ascending">Ascendente</string>
     <string name="sort_descending">Descendente</string>
