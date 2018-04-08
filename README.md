@@ -59,6 +59,8 @@ Al momento de obtener la ubicacion del usuario en la pantalla detalles se utiliz
 
 
 ## Librerias usadas
+⋅⋅* Unordered sub-list. 
+
 ⋅⋅* Butterknife
 ⋅⋅*RxJava
 ⋅⋅*RxAndroid
