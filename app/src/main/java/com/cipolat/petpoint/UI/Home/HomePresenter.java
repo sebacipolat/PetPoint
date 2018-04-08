@@ -4,16 +4,15 @@ import com.cipolat.petpoint.Data.Model.ErrorType;
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.Data.Network.PetStoreApiInteractor;
 import com.cipolat.petpoint.UI.Base.Presenter;
-
 import java.util.ArrayList;
-
+import java.util.Collections;
 /**
  * Created by sebastian on 23/07/17.
  */
-
 public class HomePresenter implements Presenter<HomeView> {
     private HomeView mHomeView;
     private PetStoreApiInteractor mInteractor;
+    private ArrayList<Pet> petList;
 
     public HomePresenter() {
         mInteractor = new PetStoreApiInteractor();
@@ -29,6 +28,7 @@ public class HomePresenter implements Presenter<HomeView> {
         mInteractor.findPetsAvailable(new PetStoreApiInteractor.PetCallback() {
             @Override
             public void onSuccess(ArrayList<Pet> response) {
+                petList = response;
                 mHomeView.onGetPetsOk(response);
             }
 
@@ -42,5 +42,13 @@ public class HomePresenter implements Presenter<HomeView> {
     @Override
     public void detachView() {
         mHomeView = null;
+    }
+
+    public void sort(boolean sort) {
+        if (sort)
+            Collections.sort(petList, Pet.PetComparatorAscending);
+        else
+            Collections.sort(petList, Pet.PetComparatorDescending);
+        mHomeView.onUpdateList(petList);
     }
 }

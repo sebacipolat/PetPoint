@@ -1,13 +1,16 @@
 package com.cipolat.petpoint.Data.Model;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Created by sebastian on 04/04/18.
  */
 
-public class Pet implements Serializable{
+public class Pet implements Comparable<Pet>, Serializable {
 
     public static final String AVAILABLE = "available";
 
@@ -57,4 +60,23 @@ public class Pet implements Serializable{
     public void setStatus(String status) {
         this.status = status;
     }
+
+    @Override
+    public int compareTo(@NonNull Pet pet) {
+        return Long.compare(this.id, pet.getId());
+
+    }
+
+    public static Comparator<Pet> PetComparatorAscending = new Comparator<Pet>() {
+        public int compare(Pet pet1, Pet pet2) {
+            return pet1.compareTo(pet2);
+        }
+
+    };
+    public static Comparator<Pet> PetComparatorDescending = new Comparator<Pet>() {
+         public int compare(Pet pet1, Pet pet2) {
+            return pet2.compareTo(pet1);
+        }
+
+    };
 }
