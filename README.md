@@ -59,20 +59,18 @@ Al momento de obtener la ubicacion del usuario en la pantalla detalles se utiliz
 
 
 ## Librerias usadas
-- Unordered sub-list. 
-
-⋅⋅* Butterknife
-⋅⋅*RxJava
-⋅⋅*RxAndroid
-⋅⋅*okhttp3
-⋅⋅*Glide
-⋅⋅*Retrofit2
-⋅⋅*Gson
-⋅⋅*play-services-location
-⋅⋅*appCompat v4/7
-⋅⋅*Design support
-⋅⋅*ConstraintLayout
-⋅⋅*circleimageview
+- Butterknife
+- RxJava
+- RxAndroid
+- okhttp3
+- Glide
+- Retrofit2
+- Gson
+- play-services-location
+- appCompat v4/7
+- Design support
+- ConstraintLayout
+- circleimageview
 
 ## ANTES DE COMENZAR
 Borrar la carpeta images (contiene las imagenes q se ven aqui)
