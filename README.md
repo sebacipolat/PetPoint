@@ -12,10 +12,10 @@ La aplicacion se llama "PetPoint" es el nombre que le asigne a la app para una t
 que se pidio en el desafio tecnico.
 
 Esta compuesta por 2 pantallas
+<br>
 Listado Pets - MainActivity
-Detalles     - DetailActivity
-               -PetDetailsFragment
-               -MapStoreFragment
+<br>
+Detalles     - DetailActivity (PetDetailsFragment- MapStoreFragment)
                
 
 Squire is a single OpenSource Example News Reader Android APP.
