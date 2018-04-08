@@ -13,17 +13,17 @@ que se pidio en el desafio tecnico.
 
 Esta compuesta por 2 pantallas:
 <br>
-Listado Pets - MainActivity
+**Listado Pets - MainActivity**
 <br>
 Muestra listado de pets, pull to refresh y opcion en toolbar para reordenar el listado
 <br>
-DetallesPet  - DetailActivity
+**DetallesPet  - DetailActivity**
 <br>
-PetDetailsFragment:
+-PetDetailsFragment:
 <br>
 Detalles de la mascota: Nombre, disponibilidad, imagen.
 <br>
-MapStoreFragment:
+-MapStoreFragment:
 <br>
 Compuesta por un SupportMapFragment muestra la ubicacion de las 2 tiendas mencionadas
 y la ubicacion del usuario.
