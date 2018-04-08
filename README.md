@@ -49,10 +49,13 @@ y la ubicacion del usuario.
                
 ## Descripcion: 
 La aplicacion esta basada en MVP.
-El ordenamiento de las carpetas esta agrupado por funcionalidad
-
+<br>
+El ordenamiento de las carpetas esta agrupado por pantalla.
+<br>
+Se utilizo inyeccion de vistas usando Butterknife
+<br>
 Para la interaccion con el API se utilizo Retrofit 2 en conjunto con RxJava + RxAndroid.
-Al momento de obtener la ubicacion del usuario se utilizo Google FusedLocation API.
+Al momento de obtener la ubicacion del usuario en la pantalla detalles se utilizo Google FusedLocation API.
 
 
 ## Librerias usadas
@@ -61,8 +64,11 @@ RxJava
 RxAndroid
 okhttp3
 Glide
+Retrofit2
+Gson
 play-services-location
 appCompat v4/7
+Design support
 ConstraintLayout
 circleimageview
 
@@ -71,7 +77,8 @@ Borrar la carpeta images (contiene las imagenes q se ven aqui)
 
 ## PROBLEMA DE PERFOMANCE EN API
 Se aclara que el api asignada http://petstore.swagger.io
-no permite un paginado por lo que el primer request en ocasiones suele tardar unos segs dependiendo de la conexion.
+no permite paginado por lo que el primer request en ocasiones suele tardar unos segs dependiendo de la conexion
+ya que el response contiene alrededor de 5000 pets.
 
 ## License
     Copyright 2018 sebastian cipolat
