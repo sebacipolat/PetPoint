@@ -16,12 +16,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+
 import com.bumptech.glide.Glide;
 import com.cipolat.petpoint.Data.Model.ErrorType;
 import com.cipolat.petpoint.Data.Model.Pet;
 import com.cipolat.petpoint.R;
 import com.cipolat.petpoint.UI.Detail.DetailActivity;
+
 import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -54,13 +57,33 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         swipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark);
         swipeLayout.setOnRefreshListener(this);
 
-        mPresenter = new HomePresenter();
-        mPresenter.setView(this);
+        attachPresenter();
         getList();
     }
 
     /**
+     * get presenter stored
+     */
+    private void attachPresenter() {
+        mPresenter = (HomePresenter) getLastCustomNonConfigurationInstance();
+        if (mPresenter == null) {
+            mPresenter = new HomePresenter();
+        }
+        mPresenter.setView(this);
+    }
+
+    /**
+     * Keep presenter state on configuration changes
+     * @return presenter
+     */
+    @Override
+    public Object onRetainCustomNonConfigurationInstance() {
+        return mPresenter;
+    }
+
+    /**
      * Fill recyclerview with list pets
+     *
      * @param lista pets array from api
      */
     private void fillList(ArrayList<Pet> lista) {
@@ -85,13 +108,14 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
     /**
      * Retrieve pet list from api
      */
-    private void getList(){
+    private void getList() {
         showLoading(true);
         mPresenter.getPetsList();
     }
 
     /**
      * show or hide loading animation
+     *
      * @param visible boolean value visibility
      */
     private void showLoading(boolean visible) {
@@ -107,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     /**
      * show or hide swipelayout animation loading
+     *
      * @param var
      */
     private void showLoaderInidicator(boolean var) {
@@ -126,20 +151,23 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     /**
      * Array pets coming from Api
+     *
      * @param list Arraylist<pet>
      */
     @Override
-    public void onGetPetsOk(ArrayList<Pet> list) {
+    public void onGetPetsOk(ArrayList<Pet> list,boolean newData) {
         //show sort item menu
         hideSortItem(true);
         showLoading(false);
         showLoaderInidicator(false);
         fillList(list);
-        showSimpleTextSnack(getString(R.string.home_get_list_ok));
+        if(newData)
+            showSimpleTextSnack(getString(R.string.home_get_list_ok));
     }
 
     /**
-     *Array pet coming from finish sort
+     * Array pet coming from finish sort
+     *
      * @param list array pet
      */
     @Override
@@ -148,17 +176,20 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
         showLoaderInidicator(false);
         mAdapter.notifyDataSetChanged();
     }
+
     /**
-     *Array pet coming from pulltorefresh
+     * Array pet coming from pulltorefresh
      */
     @Override
     public void onRefresh() {
         showLoaderInidicator(true);
         mPresenter.getPetsList();
     }
+
     /**
      * When request error happened show error placeholder
      * and show snackbar
+     *
      * @param error error type
      */
     @Override
@@ -174,7 +205,8 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     /**
      * show snackbar for error retry
-     * @param label  text message
+     *
+     * @param label text message
      */
     private void showErrorSnack(String label) {
         Snackbar.make(coordLay, label, Snackbar.LENGTH_INDEFINITE)
@@ -187,9 +219,11 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
                 })
                 .show();
     }
+
     /**
      * show simple text snackbar
-     * @param text  text message
+     *
+     * @param text text message
      */
     private void showSimpleTextSnack(String text) {
         Snackbar.make(coordLay, text, Snackbar.LENGTH_LONG).show();
@@ -197,11 +231,14 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
 
     /**
      * Change toolbar sort item visibility
+     *
      * @param visbl boolean visible value
      */
     private void hideSortItem(boolean visbl) {
-        MenuItem sortItem = mMenu.findItem(R.id.sort);
-        sortItem.setVisible(visbl);
+        if (mMenu != null) {
+            MenuItem sortItem = mMenu.findItem(R.id.sort);
+            sortItem.setVisible(visbl);
+        }
     }
 
     @Override
@@ -250,7 +287,6 @@ public class MainActivity extends AppCompatActivity implements HomeView, SwipeRe
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 
     @Override
